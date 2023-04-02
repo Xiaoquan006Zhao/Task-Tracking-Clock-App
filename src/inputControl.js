@@ -15,6 +15,7 @@ let timerRunning = false;
 let currentTask;
 let totalTime = 0;
 
+// start
 function startTimer() {
   timerRunning = true;
   startBtn.textContent = "Stop";
