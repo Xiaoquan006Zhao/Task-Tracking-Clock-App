@@ -58,7 +58,7 @@ function stopTimer() {
 
 function init() {
   taskInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+    if (!timerRunning && e.key === "Enter") {
       startTimer();
     }
   });

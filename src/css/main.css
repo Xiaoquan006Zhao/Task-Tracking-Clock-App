@@ -223,7 +223,7 @@ li {
   margin-top: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-evenly; }
 
 #input-control {
   padding: 25px;
