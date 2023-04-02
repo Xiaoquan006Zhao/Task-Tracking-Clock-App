@@ -1,0 +1,104 @@
+@import "utils";
+@import "config";
+
+.timer-starts {
+  background: rgb(237, 61, 61);
+}
+
+#current-task-dislay {
+  @include set-color-and-bg($nice-color);
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#input-control {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  * {
+    margin: 5px;
+  }
+
+  select {
+    padding-left: 7px;
+    padding-right: 7px;
+    margin: 2px;
+  }
+
+  #task-input {
+    width: 40vw;
+    font-size: 1.5rem;
+    align-self: stretch;
+    background: transparent;
+    text-decoration: none;
+    border: none;
+    border-bottom: 3px solid $primary-color;
+    color: $primary-color;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+table {
+  white-space: nowrap !important;
+
+  // border-collapse: collapse;
+  border-spacing: 0px;
+  margin-top: 20px;
+  font-size: 1rem;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+}
+
+th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  // achieves the same visual effects as a bottom and right border
+  // Hack, since border do not work well with two colors and I can not use
+  // border-collapse: seperate; as I will be dynaimcally adding elements to tr
+  // it creates a visual defect
+  box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333;
+}
+
+tr {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  // Child of td element, here because it's together with front-button-wrap ()
+  .open-button-style {
+    position: absolute;
+    top: 9px;
+    right: 1px;
+    padding: 3px;
+  }
+}
+
+td {
+  max-width: 150px;
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px;
+  padding-right: 0rem;
+  // refer to th for reasons to use box-shadow
+  box-shadow: -3px 0px 0px inset #fff, 0px -1px 0px inset #aaa;
+}
+
+th:hover,
+td:hover {
+  background-color: lighten($secondary-color, 20%);
+}

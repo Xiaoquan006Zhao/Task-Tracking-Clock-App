@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./inputControl.js" type="module" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+  <body>
+    <section class="container">
+      <div id="input-control" class="bg-secondary">
+        <input type="text" id="task-input" placeholder="Enter task here" />
+        <select id="category-select" class="btn-primary">
+          <option value="research">Research</option>
+          <option value="exercise">Exercise</option>
+          <option value="startup">Startup</option>
+          <option value="school">School</option>
+        </select>
+        <div id="start-button" class="btn-primary">Start</div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="current-task-dislay">
+        <div id="current-task">Current Task:</div>
+        <div id="record-time">00:00:00</div>
+      </div>
+    </section>
+
+    <section class="container">
+      <table id="task-list">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Category</th>
+            <th>Duration</th>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="aggreated-data">
+            <td>--</td>
+            <td>--</td>
+            <td id="total-time"></td>
+            <td>--</td>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

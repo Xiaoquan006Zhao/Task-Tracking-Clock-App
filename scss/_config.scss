@@ -1,0 +1,102 @@
+@import "functions";
+
+$screen-width: 1280px;
+$primary-color: #0a0526;
+$secondary-color: #4ebc94;
+$light-color: #c6c6c6;
+$dark-color: #00214d;
+$lightgray: lighten(#000, 50%);
+$nice-color: #e26161;
+$light-color-transparent: rgba(255, 252, 252, 0.6);
+
+.hidden {
+  visibility: hidden;
+}
+
+.color {
+  &-primary {
+    color: $primary-color;
+  }
+
+  &-secondary {
+    color: $secondary-color;
+  }
+
+  &-light {
+    color: $light-color;
+  }
+
+  &-dark {
+    color: $dark-color;
+  }
+}
+
+.bg {
+  &-primary {
+    @include set-color-and-bg($primary-color);
+  }
+
+  &-secondary {
+    @include set-color-and-bg($secondary-color);
+  }
+
+  &-light {
+    @include set-color-and-bg($light-color);
+  }
+
+  &-dark {
+    @include set-color-and-bg($dark-color);
+  }
+
+  &-secondaryLight {
+    @include set-color-and-bg(lighten($secondary-color, 20%));
+  }
+
+  &-red {
+    @include set-color-and-bg(lighten(rgb(219, 79, 79), 20%));
+  }
+}
+
+// Padding
+.py {
+  &-1 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  &-2 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  &-3 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  &-4 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+// Margin
+.my {
+  &-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  &-2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  &-3 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  &-4 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+li {
+  list-style: none;
+}
