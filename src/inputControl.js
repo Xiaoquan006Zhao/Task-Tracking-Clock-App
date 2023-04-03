@@ -56,6 +56,36 @@ function stopTimer() {
   updateTaskList();
 }
 
+function filterDescription(filterValue) {
+  let divTasks = taskTableBody.querySelectorAll("tr");
+  divTasks = Array.from(divTasks);
+  divTasks = divTasks.slice(0, -1);
+
+  divTasks.forEach((div) => {
+    const taskDescription = div.firstElementChild.textContent;
+
+    div.style.display = taskDescription.includes(filterValue) ? "" : "none";
+  });
+}
+
+function filterCategory(filterValue) {
+  let divTasks = taskTableBody.querySelectorAll("tr");
+  divTasks = Array.from(divTasks);
+  divTasks = divTasks.slice(0, -1);
+
+  console.log(divTasks);
+  console.log(filterValue);
+
+  divTasks.forEach((div) => {
+    const taskCategory = div.querySelector(":nth-child(2)").textContent;
+
+    div.style.display =
+      filterValue === "----" || taskCategory.includes(filterValue)
+        ? ""
+        : "none";
+  });
+}
+
 function init() {
   taskInput.addEventListener("keydown", (e) => {
     if (!timerRunning && e.key === "Enter") {
@@ -70,10 +100,32 @@ function init() {
       stopTimer();
     }
   });
+
+  taskTableBody.addEventListener("click", (e) => {
+    const taskTr = e.target.closest(".task-row");
+
+    if (taskTr) {
+      const columns = taskTr.querySelectorAll("td");
+      taskInput.value = columns[0].textContent;
+      categorySelect.value = columns[1].textContent;
+    }
+  });
+
+  const descriptionFilter = document.querySelector("#description-filter");
+  descriptionFilter.addEventListener("input", (e) => {
+    filterDescription(e.target.value);
+  });
+
+  const categoryFilter = document.querySelector("#category-filter");
+  categoryFilter.addEventListener("input", (e) => {
+    filterCategory(e.target.value);
+  });
 }
 
 function updateTaskList() {
   const tr = document.createElement("tr");
+  tr.classList.add("task-row");
+
   const tdTask = document.createElement("td");
   const tdCategory = document.createElement("td");
   const tdDuration = document.createElement("td");

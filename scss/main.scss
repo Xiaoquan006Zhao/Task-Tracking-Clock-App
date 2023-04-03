@@ -5,6 +5,10 @@
   background: rgb(237, 61, 61);
 }
 
+.task-row {
+  cursor: pointer;
+}
+
 #current-task-dislay {
   @include set-color-and-bg($nice-color);
   padding: 10px;
@@ -91,11 +95,26 @@ td {
   min-width: 100px;
   position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
   padding: 15px;
-  padding-right: 0rem;
+  // padding-right: 0rem;
   // refer to th for reasons to use box-shadow
   box-shadow: -3px 0px 0px inset #fff, 0px -1px 0px inset #aaa;
+
+  #category-filter {
+    height: 100%;
+    width: 100%;
+  }
+
+  #description-filter {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid $primary-color;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 th:hover,

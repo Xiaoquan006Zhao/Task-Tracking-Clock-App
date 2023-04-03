@@ -13,10 +13,12 @@
       <div id="input-control" class="bg-secondary">
         <input type="text" id="task-input" placeholder="Enter task here" />
         <select id="category-select" class="btn-primary">
-          <option value="research">Research</option>
-          <option value="exercise">Exercise</option>
-          <option value="startup">Startup</option>
-          <option value="school">School</option>
+          <option value="Research">Research</option>
+          <option value="Exercise">Exercise</option>
+          <option value="Startup">Startup</option>
+          <option value="School">School</option>
+          <option value="Relax">Relax</option>
+          <option value="Necessity">Necessity</option>
         </select>
         <div id="start-button" class="btn-primary">Start</div>
       </div>
@@ -42,8 +44,20 @@
         </thead>
         <tbody>
           <tr id="aggreated-data">
-            <td>--</td>
-            <td>--</td>
+            <td>
+              <input type="text" id="description-filter" />
+            </td>
+            <td>
+              <select id="category-filter" class="btn-primary">
+                <option value="">----</option>
+                <option value="Research">Research</option>
+                <option value="Exercise">Exercise</option>
+                <option value="Startup">Startup</option>
+                <option value="School">School</option>
+                <option value="Relax">Relax</option>
+                <option value="Necessity">Necessity</option>
+              </select>
+            </td>
             <td id="total-time"></td>
             <td>--</td>
             <td>--</td>
