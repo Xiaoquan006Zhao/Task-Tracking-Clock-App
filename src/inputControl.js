@@ -1,11 +1,19 @@
 const taskInput = document.querySelector("#task-input");
 const categorySelect = document.querySelector("#category-select");
+
 const startBtn = document.querySelector("#start-button");
+const laterBtn = document.querySelector("#later-button");
+const tomorrowBtn = document.querySelector("#tomorrow-button");
+const clearInputBtn = document.getElementById("clear-input");
+
 const taskTableBody = document.querySelector("tbody");
 const totalTimeElement = taskTableBody.querySelector("#total-time");
 const tableAggreatedData = taskTableBody.querySelector("#aggreated-data");
 const currentTaskElement = document.querySelector("#current-task");
 const recordTimeElement = document.querySelector("#record-time");
+
+const todoList = document.querySelector(".todo-list");
+const tomorrowList = document.querySelector(".tomorrow-list");
 
 const taskList = [];
 let startTime = 0;
@@ -33,7 +41,7 @@ function startTimer() {
     startTime: startTime,
   };
   taskList.push(currentTask);
-  taskInput.value = "";
+  resetUI();
 
   currentTaskElement.textContent = `Current Task: ${currentTask.description}`;
 }
@@ -86,12 +94,44 @@ function filterCategory(filterValue) {
   });
 }
 
+function handleTodo(e) {
+  const clicked = e.target;
+
+  if (clicked.closest(".remove-item")) {
+    e.target.parentElement.parentElement.remove();
+  }
+  if (clicked.nodeName === "LI") {
+    taskInput.value = clicked.textContent;
+  }
+}
+
 function init() {
   taskInput.addEventListener("keydown", (e) => {
-    if (!timerRunning && e.key === "Enter") {
+    clearInputBtn.classList.remove("hidden");
+    if (timerRunning) {
+      clearInputBtn.classList.add("hidden");
+    } else if (e.key === "Enter") {
       startTimer();
     }
+
+    if (e.key === "-") {
+      e.preventDefault();
+      laterBtn.click();
+    } else if (e.key === "=") {
+      e.preventDefault();
+      tomorrowBtn.click();
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      resetUI();
+    }
   });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && timerRunning) {
+      startBtn.click();
+    }
+  });
+
   startBtn.addEventListener("click", (e) => {
     if (!timerRunning) {
       startTimer();
@@ -100,6 +140,11 @@ function init() {
       stopTimer();
     }
   });
+
+  laterBtn.addEventListener("click", addtoTodo.bind(null, todoList));
+  tomorrowBtn.addEventListener("click", addtoTodo.bind(null, tomorrowList));
+  todoList.addEventListener("click", handleTodo);
+  tomorrowList.addEventListener("click", handleTodo);
 
   taskTableBody.addEventListener("click", (e) => {
     const taskTr = e.target.closest(".task-row");
@@ -111,15 +156,53 @@ function init() {
     }
   });
 
-  const descriptionFilter = document.querySelector("#description-filter");
-  descriptionFilter.addEventListener("input", (e) => {
-    filterDescription(e.target.value);
-  });
+  clearInputBtn.addEventListener("click", resetUI);
 
-  const categoryFilter = document.querySelector("#category-filter");
-  categoryFilter.addEventListener("input", (e) => {
-    filterCategory(e.target.value);
-  });
+  filterTable();
+}
+
+function addtoTodo(list) {
+  const lis = list.querySelectorAll("li");
+  const lisText = Array.from(lis).map((li) => li.textContent);
+
+  if (taskInput.value && !lisText.includes(taskInput.value)) {
+    createTodo(list, taskInput.value);
+  } else {
+    alert("tasks empty or already existed");
+  }
+  resetUI();
+}
+
+function createTodo(list, item) {
+  // Create list item
+  const li = document.createElement("li");
+  li.appendChild(document.createTextNode(item));
+
+  const button = createButton("remove-item btn-link text-red");
+  li.appendChild(button);
+
+  // Add li to the DOM
+  list.appendChild(li);
+}
+
+function createButton(classes) {
+  const button = document.createElement("button");
+  button.className = classes;
+  const icon = createIcon("fa-solid fa-xmark");
+  button.appendChild(icon);
+  return button;
+}
+
+function createIcon(classes) {
+  const icon = document.createElement("i");
+  icon.className = classes;
+  icon.style.marginRight = "3px";
+  return icon;
+}
+
+function resetUI() {
+  taskInput.value = "";
+  clearInputBtn.classList.add("hidden");
 }
 
 function updateTaskList() {
@@ -160,6 +243,18 @@ function formatTime(milliseconds) {
   const paddedSeconds = seconds.toString().padStart(2, "0");
 
   return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
+}
+
+function filterTable() {
+  const descriptionFilter = document.querySelector("#description-filter");
+  descriptionFilter.addEventListener("input", (e) => {
+    filterDescription(e.target.value);
+  });
+
+  const categoryFilter = document.querySelector("#category-filter");
+  categoryFilter.addEventListener("input", (e) => {
+    filterCategory(e.target.value);
+  });
 }
 
 init();

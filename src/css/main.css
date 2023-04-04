@@ -211,6 +211,73 @@ a {
 li {
   list-style: none; }
 
+.layout-wrapper {
+  height: 100vh;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr; }
+
+.todo-wrapper {
+  width: 80%; }
+  .todo-wrapper .todo {
+    min-height: 10vh;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    white-space: pre-wrap; }
+  .todo-wrapper #moveToToday-button {
+    width: 100%;
+    text-align: center;
+    border-radius: 7px;
+    margin-bottom: 10px; }
+
+button {
+  cursor: pointer; }
+
+.input-wrapper {
+  position: relative; }
+  .input-wrapper #clear-input {
+    position: absolute;
+    top: 0px;
+    right: 0px; }
+  .input-wrapper .hidden {
+    display: none; }
+
+.btn-link {
+  font-size: 16px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 0;
+  cursor: pointer; }
+
+.text-red {
+  color: red; }
+
+h2 {
+  width: 100%;
+  border-bottom: 2px solid #4ebc94;
+  font-size: 1.2rem; }
+
+.todo {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; }
+  .todo ul {
+    width: 100%; }
+    .todo ul li {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 3px;
+      padding: 2px;
+      border-bottom: 2px solid gray; }
+      .todo ul li:hover {
+        cursor: pointer;
+        border-bottom: 2px solid #4ebc94; }
+
 .timer-starts {
   background: #ed3d3d; }
 
