@@ -8,6 +8,8 @@ const clearInputBtn = document.getElementById("clear-input");
 const todoBtn = document.getElementById("todo-button");
 const moveToTodayBtn = document.getElementById("moveToToday-button");
 const newDayBtn = document.getElementById("newDay-button");
+const deleteAllToday = document.getElementById("delete-all-today");
+const deleteAllTomorrow = document.getElementById("delete-all-tomorrow");
 
 const taskTableBody = document.querySelector("tbody");
 const totalTimeElement = taskTableBody.querySelector("#total-time");
@@ -230,7 +232,27 @@ function init() {
   loadStorage();
 }
 
+function deleteAll(list) {
+  const whichlist = list === todoList ? "today" : "tomorrow";
+
+  while (list.firstElementChild) {
+    const task = list.firstElementChild.textContent;
+    if (whichlist === "today") {
+      removeFromListAndStorage(todo_list, task);
+    } else {
+      removeFromListAndStorage(tomorrow_list, task);
+    }
+    list.removeChild(list.firstElementChild);
+  }
+}
+
 function initButton() {
+  deleteAllToday.addEventListener("click", deleteAll.bind(null, todoList));
+  deleteAllTomorrow.addEventListener(
+    "click",
+    deleteAll.bind(null, tomorrowList)
+  );
+
   clearInputBtn.addEventListener("click", resetUI);
 
   newDayBtn.addEventListener("click", clearTask);

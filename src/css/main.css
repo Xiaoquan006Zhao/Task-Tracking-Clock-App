@@ -82,6 +82,9 @@ li {
   overflow-wrap: break-word;
   word-break: break-word; }
 
+i {
+  cursor: pointer; }
+
 .task-row,
 button {
   cursor: pointer; }
@@ -262,7 +265,7 @@ h2 {
   border-bottom: 2px solid #e26161;
   font-size: 1.2rem; }
 
-#newDay-tr {
+.embed-button {
   display: flex;
   align-items: center;
   justify-content: space-between; }

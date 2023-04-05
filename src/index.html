@@ -60,7 +60,7 @@
       <table id="task-list">
         <thead>
           <tr>
-            <th id="newDay-tr">
+            <th class="embed-button">
               Task
               <div id="newDay-button" class="btn-primary">New Day</div>
             </th>
@@ -96,14 +96,28 @@
 
     <div class="todo-wrapper hidden">
       <section class="todo bg-primary">
-        <h2>Today:</h2>
+        <h2 class="embed-button">
+          Today:
+          <i
+            class="fa-solid fa-xmark text-red"
+            id="delete-all-today"
+            style="margin-right: 3px"
+          ></i>
+        </h2>
         <ul class="todo-list"></ul>
       </section>
 
       <div id="moveToToday-button" class="btn-secondary">move</div>
 
       <section class="todo bg-primary">
-        <h2>Tomorrow:</h2>
+        <h2 class="embed-button">
+          Tomorrow:
+          <i
+            class="fa-solid fa-xmark text-red"
+            id="delete-all-tomorrow"
+            style="margin-right: 3px"
+          ></i>
+        </h2>
         <ul class="tomorrow-list"></ul>
       </section>
     </div>
