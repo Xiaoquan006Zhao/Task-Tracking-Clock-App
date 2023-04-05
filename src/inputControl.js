@@ -5,12 +5,16 @@ const startBtn = document.querySelector("#start-button");
 const laterBtn = document.querySelector("#later-button");
 const tomorrowBtn = document.querySelector("#tomorrow-button");
 const clearInputBtn = document.getElementById("clear-input");
+const todoBtn = document.getElementById("todo-button");
+const moveToTodayBtn = document.getElementById("moveToToday-button");
 
 const taskTableBody = document.querySelector("tbody");
 const totalTimeElement = taskTableBody.querySelector("#total-time");
 const tableAggreatedData = taskTableBody.querySelector("#aggreated-data");
 const currentTaskElement = document.querySelector("#current-task");
 const recordTimeElement = document.querySelector("#record-time");
+
+const todoWrapper = document.querySelector(".todo-wrapper");
 
 const todoList = document.querySelector(".todo-list");
 const tomorrowList = document.querySelector(".tomorrow-list");
@@ -101,8 +105,24 @@ function handleTodo(e) {
     e.target.parentElement.parentElement.remove();
   }
   if (clicked.nodeName === "LI") {
+    resetUI();
     taskInput.value = clicked.textContent;
   }
+}
+
+function moveToToday() {
+  const tomorrowLis = tomorrowList.querySelectorAll("li");
+  const tomorrowLisText = Array.from(tomorrowLis).map((li) => li.textContent);
+
+  const todayLis = todoList.querySelectorAll("li");
+  const todayLisText = Array.from(todayLis).map((li) => li.textContent);
+
+  tomorrowLisText.forEach((tomorrowTodo, index) => {
+    if (!todayLisText.includes(tomorrowTodo)) {
+      createTodo(todoList, tomorrowTodo);
+    }
+    tomorrowLis[index].remove();
+  });
 }
 
 function init() {
@@ -124,17 +144,39 @@ function init() {
     } else if (e.key === "=") {
       e.preventDefault();
       tomorrowBtn.click();
-    } else if (e.key === "Tab") {
+    } else if (e.key === "Backspace") {
       e.preventDefault();
       resetUI();
     }
   });
 
+  todoBtn.addEventListener("click", (e) => {
+    todoWrapper.classList.remove("hidden");
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && timerRunning) {
+      e.preventDefault();
       startBtn.click();
+    } else if (e.key === "`") {
+      e.preventDefault();
+      todoWrapper.classList.toggle("hidden");
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      taskInput.focus();
+    } else if (e.key === "m") {
+      e.preventDefault();
+      moveToTodayBtn.click();
     }
   });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("todo-wrapper")) {
+      todoWrapper.classList.add("hidden");
+    }
+  });
+
+  moveToTodayBtn.addEventListener("click", moveToToday);
 
   startBtn.addEventListener("click", (e) => {
     if (!timerRunning) {
@@ -208,7 +250,9 @@ function createIcon(classes) {
 
 function resetUI() {
   taskInput.value = "";
+  taskInput.focus();
   clearInputBtn.classList.add("hidden");
+  todoWrapper.classList.add("hidden");
 }
 
 function updateTaskList() {
