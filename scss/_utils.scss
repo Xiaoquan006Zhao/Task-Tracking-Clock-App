@@ -23,15 +23,8 @@ td:hover {
   background-color: lighten($secondary-color, 20%);
 }
 
-.max-container {
-  max-width: $screen-width;
-  padding: 0 1rem;
-  margin: auto;
-  overflow: hidden;
-}
-
 .container {
-  max-width: 60vw;
+  max-width: $screen-width;
   padding: 0 1rem;
   margin: auto;
   overflow: hidden;
@@ -39,6 +32,10 @@ td:hover {
 
 a {
   text-decoration: none;
+}
+
+.hidden {
+  display: none;
 }
 
 %btn-shared {
@@ -51,7 +48,7 @@ a {
   font-weight: 900;
 
   &:hover {
-    opacity: 0.9;
+    // opacity: 0.9;
     @include set-color-and-bg($nice-color);
   }
 }

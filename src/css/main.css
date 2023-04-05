@@ -90,20 +90,17 @@ th:hover,
 td:hover {
   background-color: #98d8c1; }
 
-.max-container {
-  max-width: 1280px;
-  padding: 0 1rem;
-  margin: auto;
-  overflow: hidden; }
-
 .container {
-  max-width: 60vw;
+  max-width: 1280px;
   padding: 0 1rem;
   margin: auto;
   overflow: hidden; }
 
 a {
   text-decoration: none; }
+
+.hidden {
+  display: none; }
 
 .btn-primary, .btn-secondary, .btn-light, .btn-dark, .btn-small, .btn-remove {
   display: inline-block;
@@ -114,7 +111,6 @@ a {
   border-radius: 10px;
   font-weight: 900; }
   .btn-primary:hover, .btn-secondary:hover, .btn-light:hover, .btn-dark:hover, .btn-small:hover, .btn-remove:hover {
-    opacity: 0.9;
     background-color: #e26161;
     color: #000; }
 
@@ -225,17 +221,36 @@ a {
 li {
   list-style: none; }
 
-.layout-wrapper {
+.todo-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr; }
-  .layout-wrapper .todo-wrapper .todo {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  z-index: 999; }
+  .todo-wrapper .todo {
     min-height: 20vh !important;
     width: 100%;
     margin-bottom: 10px;
-    padding: 5px; }
-  .layout-wrapper .todo-wrapper #moveToToday-button {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; }
+    .todo-wrapper .todo ul {
+      width: 100%; }
+      .todo-wrapper .todo ul li {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 3px;
+        padding: 2px;
+        border-bottom: 2px solid gray; }
+        .todo-wrapper .todo ul li:hover {
+          cursor: pointer;
+          border-bottom: 2px solid #4ebc94; }
+  .todo-wrapper #moveToToday-button {
     width: 100%;
     text-align: center;
     border-radius: 7px;
@@ -243,27 +258,18 @@ li {
 
 h2 {
   width: 100%;
-  border-bottom: 2px solid #4ebc94;
+  border-bottom: 2px solid #e26161;
   font-size: 1.2rem; }
 
-.todo {
-  width: 100%;
-  padding: 5px;
+.hotkey {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start; }
-  .todo ul {
-    width: 100%; }
-    .todo ul li {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin: 3px;
-      padding: 2px;
-      border-bottom: 2px solid gray; }
-      .todo ul li:hover {
-        cursor: pointer;
-        border-bottom: 2px solid #4ebc94; }
+  margin: 10px 0px; }
+  .hotkey p {
+    background-color: #c6c6c6;
+    color: #000;
+    border-radius: 5px;
+    margin-right: 3px;
+    padding: 5px; }
 
 .timer-starts {
   background: #ed3d3d; }
@@ -282,7 +288,6 @@ h2 {
 #input-control {
   padding: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto; }
@@ -291,7 +296,7 @@ h2 {
   #input-control .input-wrapper {
     position: relative; }
     #input-control .input-wrapper #task-input {
-      width: 50vw;
+      width: 35vw;
       font-size: 1.5rem;
       align-self: stretch;
       background: transparent;
@@ -305,17 +310,10 @@ h2 {
       position: absolute;
       top: 0px;
       right: 0px; }
-    #input-control .input-wrapper .hidden {
-      display: none; }
-  #input-control .input-button-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly; }
-    #input-control .input-button-wrapper select {
-      padding-left: 7px;
-      padding-right: 7px;
-      margin: 2px; }
+  #input-control select {
+    padding-left: 7px;
+    padding-right: 7px;
+    margin: 2px; }
 
 table {
   white-space: nowrap !important;
