@@ -180,14 +180,14 @@ function init() {
     } else if (e.key === "=") {
       e.preventDefault();
       tomorrowBtn.click();
-    } else if (e.key === "Backspace") {
+    } else if (e.key === "Escape") {
       e.preventDefault();
       resetUI();
     }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && timerRunning) {
+    if (e.key === "Shift" && timerRunning) {
       e.preventDefault();
       startBtn.click();
     } else if (e.key === "`") {

@@ -271,7 +271,9 @@ h2 {
   justify-content: space-between; }
 
 .hotkey {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
   margin: 10px 0px; }
   .hotkey p {
     background-color: #c6c6c6;
