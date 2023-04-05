@@ -82,9 +82,23 @@ li {
   overflow-wrap: break-word;
   word-break: break-word; }
 
-.container {
+.task-row,
+button {
+  cursor: pointer; }
+
+th:hover,
+td:hover {
+  background-color: #98d8c1; }
+
+.max-container {
   max-width: 1280px;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+  margin: auto;
+  overflow: hidden; }
+
+.container {
+  max-width: 60vw;
+  padding: 0 1rem;
   margin: auto;
   overflow: hidden; }
 
@@ -212,47 +226,20 @@ li {
   list-style: none; }
 
 .layout-wrapper {
+  width: 100%;
   height: 100vh;
   display: grid;
-  grid-gap: 10px;
   grid-template-columns: 1fr 1fr; }
-
-.todo-wrapper {
-  width: 80%; }
-  .todo-wrapper .todo {
-    min-height: 10vh;
+  .layout-wrapper .todo-wrapper .todo {
+    min-height: 20vh !important;
     width: 100%;
     margin-bottom: 10px;
-    padding: 5px;
-    white-space: pre-wrap; }
-  .todo-wrapper #moveToToday-button {
+    padding: 5px; }
+  .layout-wrapper .todo-wrapper #moveToToday-button {
     width: 100%;
     text-align: center;
     border-radius: 7px;
     margin-bottom: 10px; }
-
-button {
-  cursor: pointer; }
-
-.input-wrapper {
-  position: relative; }
-  .input-wrapper #clear-input {
-    position: absolute;
-    top: 0px;
-    right: 0px; }
-  .input-wrapper .hidden {
-    display: none; }
-
-.btn-link {
-  font-size: 16px;
-  background-color: transparent;
-  color: #333;
-  border: none;
-  padding: 0;
-  cursor: pointer; }
-
-.text-red {
-  color: red; }
 
 h2 {
   width: 100%;
@@ -281,9 +268,6 @@ h2 {
 .timer-starts {
   background: #ed3d3d; }
 
-.task-row {
-  cursor: pointer; }
-
 #current-task-dislay {
   background-color: #e26161;
   color: #000;
@@ -296,28 +280,42 @@ h2 {
   justify-content: space-evenly; }
 
 #input-control {
-  padding: 25px;
+  padding: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto; }
   #input-control * {
     margin: 5px; }
-  #input-control select {
-    padding-left: 7px;
-    padding-right: 7px;
-    margin: 2px; }
-  #input-control #task-input {
-    width: 40vw;
-    font-size: 1.5rem;
-    align-self: stretch;
-    background: transparent;
-    text-decoration: none;
-    border: none;
-    border-bottom: 3px solid #0a0526;
-    color: #0a0526; }
-    #input-control #task-input:focus {
-      outline: none; }
+  #input-control .input-wrapper {
+    position: relative; }
+    #input-control .input-wrapper #task-input {
+      width: 50vw;
+      font-size: 1.5rem;
+      align-self: stretch;
+      background: transparent;
+      text-decoration: none;
+      border: none;
+      border-bottom: 3px solid #0a0526;
+      color: #0a0526; }
+      #input-control .input-wrapper #task-input:focus {
+        outline: none; }
+    #input-control .input-wrapper #clear-input {
+      position: absolute;
+      top: 0px;
+      right: 0px; }
+    #input-control .input-wrapper .hidden {
+      display: none; }
+  #input-control .input-button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; }
+    #input-control .input-button-wrapper select {
+      padding-left: 7px;
+      padding-right: 7px;
+      margin: 2px; }
 
 table {
   white-space: nowrap !important;
@@ -325,31 +323,21 @@ table {
   margin-top: 20px;
   font-size: 1rem;
   cursor: default;
-  width: 100%;
-  height: 100%; }
-
-th {
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: bold;
-  box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333; }
+  width: 100%; }
 
 tr {
-  position: relative;
-  width: 100%;
-  height: 100%; }
-  tr .open-button-style {
-    position: absolute;
-    top: 9px;
-    right: 1px;
-    padding: 3px; }
+  position: relative; }
+  tr th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333; }
 
 td {
-  max-width: 150px;
-  min-width: 100px;
+  max-width: calc(60vw / 4) !important;
   position: relative;
   overflow: hidden;
-  padding: 15px;
+  padding: 10px;
   box-shadow: -3px 0px 0px inset #fff, 0px -1px 0px inset #aaa; }
   td #category-filter {
     height: 100%;
@@ -363,6 +351,13 @@ td {
     width: 100%;
     height: 100%; }
 
-th:hover,
-td:hover {
-  background-color: #98d8c1; }
+.btn-link {
+  font-size: 16px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 0;
+  cursor: pointer; }
+
+.text-red {
+  color: red; }

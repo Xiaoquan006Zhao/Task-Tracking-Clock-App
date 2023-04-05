@@ -13,9 +13,26 @@
   word-break: break-word;
 }
 
-.container {
+.task-row,
+button {
+  cursor: pointer;
+}
+
+th:hover,
+td:hover {
+  background-color: lighten($secondary-color, 20%);
+}
+
+.max-container {
   max-width: $screen-width;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+  margin: auto;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 60vw;
+  padding: 0 1rem;
   margin: auto;
   overflow: hidden;
 }

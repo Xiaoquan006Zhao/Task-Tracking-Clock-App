@@ -111,6 +111,10 @@ function init() {
     if (timerRunning) {
       clearInputBtn.classList.add("hidden");
     } else if (e.key === "Enter") {
+      if (taskInput.value === "") {
+        alert("Empty task");
+        return;
+      }
       startTimer();
     }
 
@@ -153,6 +157,8 @@ function init() {
       const columns = taskTr.querySelectorAll("td");
       taskInput.value = columns[0].textContent;
       categorySelect.value = columns[1].textContent;
+
+      taskInput.focus();
     }
   });
 

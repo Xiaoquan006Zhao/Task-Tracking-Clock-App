@@ -2,56 +2,25 @@
 @import "config";
 
 .layout-wrapper {
+  width: 100%;
   height: 100vh;
   display: grid;
-  grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-}
 
-.todo-wrapper {
-  width: 80%;
-  .todo {
-    min-height: 10vh;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 5px;
-    white-space: pre-wrap;
+  .todo-wrapper {
+    .todo {
+      min-height: 20vh !important;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    #moveToToday-button {
+      width: 100%;
+      text-align: center;
+      border-radius: 7px;
+      margin-bottom: 10px;
+    }
   }
-  #moveToToday-button {
-    width: 100%;
-    text-align: center;
-    border-radius: 7px;
-    margin-bottom: 10px;
-  }
-}
-
-button {
-  cursor: pointer;
-}
-
-.input-wrapper {
-  position: relative;
-
-  #clear-input {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-  }
-  .hidden {
-    display: none;
-  }
-}
-
-.btn-link {
-  font-size: 16px;
-  background-color: transparent;
-  color: #333;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-.text-red {
-  color: red;
 }
 
 h2 {
@@ -89,10 +58,6 @@ h2 {
   background: rgb(237, 61, 61);
 }
 
-.task-row {
-  cursor: pointer;
-}
-
 #current-task-dislay {
   @include set-color-and-bg($nice-color);
   padding: 10px;
@@ -106,8 +71,9 @@ h2 {
 }
 
 #input-control {
-  padding: 25px;
+  padding: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -116,72 +82,77 @@ h2 {
     margin: 5px;
   }
 
-  select {
-    padding-left: 7px;
-    padding-right: 7px;
-    margin: 2px;
+  .input-wrapper {
+    position: relative;
+
+    #task-input {
+      width: 50vw;
+      font-size: 1.5rem;
+      align-self: stretch;
+      background: transparent;
+      text-decoration: none;
+      border: none;
+      border-bottom: 3px solid $primary-color;
+      color: $primary-color;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    #clear-input {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    .hidden {
+      display: none;
+    }
   }
 
-  #task-input {
-    width: 40vw;
-    font-size: 1.5rem;
-    align-self: stretch;
-    background: transparent;
-    text-decoration: none;
-    border: none;
-    border-bottom: 3px solid $primary-color;
-    color: $primary-color;
+  .input-button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
-    &:focus {
-      outline: none;
+    select {
+      padding-left: 7px;
+      padding-right: 7px;
+      margin: 2px;
     }
   }
 }
+
 table {
   white-space: nowrap !important;
-
-  // border-collapse: collapse;
   border-spacing: 0px;
   margin-top: 20px;
   font-size: 1rem;
   cursor: default;
   width: 100%;
-  height: 100%;
-}
-
-th {
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: bold;
-  // achieves the same visual effects as a bottom and right border
-  // Hack, since border do not work well with two colors and I can not use
-  // border-collapse: seperate; as I will be dynaimcally adding elements to tr
-  // it creates a visual defect
-  box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333;
 }
 
 tr {
   position: relative;
-  width: 100%;
-  height: 100%;
 
-  // Child of td element, here because it's together with front-button-wrap ()
-  .open-button-style {
-    position: absolute;
-    top: 9px;
-    right: 1px;
-    padding: 3px;
+  th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    // achieves the same visual effects as a bottom and right border
+    // Hack, since border do not work well with two colors and I can not use
+    // border-collapse: seperate; as I will be dynaimcally adding elements to tr
+    // it creates a visual defect
+    box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333;
   }
 }
 
 td {
-  max-width: 150px;
-  min-width: 100px;
+  max-width: calc(60vw / 4) !important;
   position: relative;
   overflow: hidden;
-  // text-overflow: ellipsis;
-  padding: 15px;
-  // padding-right: 0rem;
+  padding: 10px;
   // refer to th for reasons to use box-shadow
   box-shadow: -3px 0px 0px inset #fff, 0px -1px 0px inset #aaa;
 
@@ -201,7 +172,14 @@ td {
   }
 }
 
-th:hover,
-td:hover {
-  background-color: lighten($secondary-color, 20%);
+.btn-link {
+  font-size: 16px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.text-red {
+  color: red;
 }
