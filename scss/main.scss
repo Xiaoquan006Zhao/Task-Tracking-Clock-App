@@ -2,6 +2,12 @@
 @import "config";
 @import "todo";
 
+#newDay-tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .hotkey {
   display: flex;
   margin: 10px 0px;
@@ -80,10 +86,19 @@ table {
   font-size: 1rem;
   cursor: default;
   width: 100%;
+
+  overflow: hidden;
 }
 
 tr {
   position: relative;
+
+  .remove-task {
+    position: absolute;
+    top: 9px;
+    right: 1px;
+    padding: 3px;
+  }
 
   th {
     padding: 12px 15px;
@@ -98,7 +113,9 @@ tr {
 }
 
 td {
-  max-width: calc(60vw / 4) !important;
+  max-width: 30vw !important;
+  text-overflow: ellipsis;
+  // max-width: calc(60vw / 100) !important;
   position: relative;
   overflow: hidden;
   padding: 10px;

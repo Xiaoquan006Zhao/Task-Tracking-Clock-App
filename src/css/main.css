@@ -229,7 +229,8 @@ li {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  z-index: 999; }
+  z-index: 999;
+  overflow: scroll; }
   .todo-wrapper .todo {
     min-height: 20vh !important;
     width: 100%;
@@ -260,6 +261,11 @@ h2 {
   width: 100%;
   border-bottom: 2px solid #e26161;
   font-size: 1.2rem; }
+
+#newDay-tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
 
 .hotkey {
   display: flex;
@@ -321,10 +327,16 @@ table {
   margin-top: 20px;
   font-size: 1rem;
   cursor: default;
-  width: 100%; }
+  width: 100%;
+  overflow: hidden; }
 
 tr {
   position: relative; }
+  tr .remove-task {
+    position: absolute;
+    top: 9px;
+    right: 1px;
+    padding: 3px; }
   tr th {
     padding: 12px 15px;
     text-align: left;
@@ -332,7 +344,8 @@ tr {
     box-shadow: -3px 0px 0px inset #fff, 0px -2px 0px inset #333; }
 
 td {
-  max-width: calc(60vw / 4) !important;
+  max-width: 30vw !important;
+  text-overflow: ellipsis;
   position: relative;
   overflow: hidden;
   padding: 10px;

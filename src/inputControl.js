@@ -7,6 +7,7 @@ const tomorrowBtn = document.querySelector("#tomorrow-button");
 const clearInputBtn = document.getElementById("clear-input");
 const todoBtn = document.getElementById("todo-button");
 const moveToTodayBtn = document.getElementById("moveToToday-button");
+const newDayBtn = document.getElementById("newDay-button");
 
 const taskTableBody = document.querySelector("tbody");
 const totalTimeElement = taskTableBody.querySelector("#total-time");
@@ -19,7 +20,10 @@ const todoWrapper = document.querySelector(".todo-wrapper");
 const todoList = document.querySelector(".todo-list");
 const tomorrowList = document.querySelector(".tomorrow-list");
 
-const taskList = [];
+let todo_list = [];
+let tomorrow_list = [];
+
+let taskList = [];
 let startTime = 0;
 let delta = 0;
 let timerId = 0;
@@ -98,11 +102,36 @@ function filterCategory(filterValue) {
   });
 }
 
-function handleTodo(e) {
+function removeFromListAndStorage(list, item) {
+  const whichList = list === todo_list ? "todoList" : "tomorrowList";
+
+  let index = list.indexOf(item);
+  if (index !== -1) {
+    list.splice(index, 1);
+  }
+  localStorage.setItem(whichList, JSON.stringify(list));
+}
+
+function addToListAndStorage(list, item) {
+  const whichList = list === todo_list ? "todoList" : "tomorrowList";
+
+  list.push(item);
+  localStorage.setItem(whichList, JSON.stringify(list));
+}
+
+function handleTodo(e, whichlist) {
   const clicked = e.target;
 
   if (clicked.closest(".remove-item")) {
-    e.target.parentElement.parentElement.remove();
+    const li = e.target.parentElement.parentElement;
+    const taskText = li.textContent;
+
+    if (whichlist === "today") {
+      removeFromListAndStorage(todo_list, taskText);
+    } else {
+      removeFromListAndStorage(tomorrow_list, taskText);
+    }
+    li.remove();
   }
   if (clicked.nodeName === "LI") {
     resetUI();
@@ -119,15 +148,16 @@ function moveToToday() {
 
   tomorrowLisText.forEach((tomorrowTodo, index) => {
     if (!todayLisText.includes(tomorrowTodo)) {
+      addToListAndStorage(todo_list, tomorrowTodo);
       createTodo(todoList, tomorrowTodo);
     }
     tomorrowLis[index].remove();
+    removeFromListAndStorage(tomorrow_list, tomorrowTodo);
   });
 }
 
 function init() {
   taskInput.addEventListener("keydown", (e) => {
-    clearInputBtn.classList.remove("hidden");
     if (timerRunning) {
       clearInputBtn.classList.add("hidden");
     } else if (e.key === "Enter") {
@@ -136,6 +166,10 @@ function init() {
         return;
       }
       startTimer();
+    }
+
+    if (taskInput.value !== "") {
+      clearInputBtn.classList.remove("hidden");
     }
 
     if (e.key === "-") {
@@ -148,10 +182,6 @@ function init() {
       e.preventDefault();
       resetUI();
     }
-  });
-
-  todoBtn.addEventListener("click", (e) => {
-    todoWrapper.classList.remove("hidden");
   });
 
   document.addEventListener("keydown", (e) => {
@@ -176,21 +206,12 @@ function init() {
     }
   });
 
-  moveToTodayBtn.addEventListener("click", moveToToday);
-
-  startBtn.addEventListener("click", (e) => {
-    if (!timerRunning) {
-      startTimer();
-    } else {
-      clearInterval(timerId);
-      stopTimer();
-    }
+  todoList.addEventListener("click", (e) => {
+    handleTodo(e, "today");
   });
-
-  laterBtn.addEventListener("click", addtoTodo.bind(null, todoList));
-  tomorrowBtn.addEventListener("click", addtoTodo.bind(null, tomorrowList));
-  todoList.addEventListener("click", handleTodo);
-  tomorrowList.addEventListener("click", handleTodo);
+  tomorrowList.addEventListener("click", (e) => {
+    handleTodo(e, "tomorrow");
+  });
 
   taskTableBody.addEventListener("click", (e) => {
     const taskTr = e.target.closest(".task-row");
@@ -204,9 +225,83 @@ function init() {
     }
   });
 
+  initButton();
+  filterTable();
+  loadStorage();
+}
+
+function initButton() {
   clearInputBtn.addEventListener("click", resetUI);
 
-  filterTable();
+  newDayBtn.addEventListener("click", clearTask);
+
+  todoBtn.addEventListener("click", (e) => {
+    todoWrapper.classList.remove("hidden");
+  });
+
+  moveToTodayBtn.addEventListener("click", moveToToday);
+
+  startBtn.addEventListener("click", (e) => {
+    if (!timerRunning) {
+      startTimer();
+    } else {
+      clearInterval(timerId);
+      stopTimer();
+    }
+  });
+
+  laterBtn.addEventListener("click", addtoTodo.bind(null, todoList));
+  tomorrowBtn.addEventListener("click", addtoTodo.bind(null, tomorrowList));
+}
+
+function clearTask() {
+  const trs = taskTableBody.querySelectorAll("tr");
+
+  Array.from(trs).forEach((tr) => {
+    console.log(tr);
+    if (tr.classList.contains("task-row")) {
+      tr.remove();
+    }
+  });
+
+  taskList = [];
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+}
+
+function loadStorage() {
+  if (localStorage.getItem("tomorrowList") === null) {
+    tomorrow_list = [];
+  } else {
+    tomorrow_list = JSON.parse(localStorage.getItem("tomorrowList"));
+  }
+
+  if (localStorage.getItem("todoList") === null) {
+    todo_list = [];
+  } else {
+    todo_list = JSON.parse(localStorage.getItem("todoList"));
+  }
+
+  todo_list.forEach((todo) => {
+    createTodo(todoList, todo);
+  });
+
+  tomorrow_list.forEach((tomorrow) => {
+    createTodo(tomorrowList, tomorrow);
+  });
+
+  if (localStorage.getItem("taskList") === null) {
+    taskList = [];
+  } else {
+    taskList = JSON.parse(localStorage.getItem("taskList"));
+  }
+
+  taskList.forEach((task) => {
+    task.startTime = new Date(task.startTime);
+    task.endTime = new Date(task.endTime);
+
+    currentTask = task;
+    updateTaskList();
+  });
 }
 
 function addtoTodo(list) {
@@ -217,7 +312,15 @@ function addtoTodo(list) {
     createTodo(list, taskInput.value);
   } else {
     alert("tasks empty or already existed");
+    return;
   }
+
+  if (list === todoList) {
+    addToListAndStorage(todo_list, taskInput.value);
+  } else if (list === tomorrowList) {
+    addToListAndStorage(tomorrow_list, taskInput.value);
+  }
+
   resetUI();
 }
 
@@ -279,7 +382,42 @@ function updateTaskList() {
     document.createTextNode(currentTask.endTime.toLocaleTimeString("en-US"))
   );
 
+  tr.addEventListener("mouseenter", (e) => {
+    const button = createButton("remove-item btn-link text-red");
+    button.classList.add("remove-task");
+
+    button.addEventListener("click", deleteTaskFromTable);
+    tr.firstChild.appendChild(button);
+  });
+
+  tr.addEventListener("mouseout", (e) => {
+    const tr = e.currentTarget;
+    const relatedTarget = e.relatedTarget;
+
+    // Check if the relatedTarget is a child of BodyTr
+    if (!tr.contains(relatedTarget)) {
+      const firstTd = e.currentTarget.firstChild;
+      firstTd.removeChild(firstTd.lastChild);
+    }
+  });
+
+  localStorage.setItem("taskList", JSON.stringify(taskList));
   taskTableBody.insertBefore(tr, tableAggreatedData);
+}
+
+function deleteTaskFromTable(e) {
+  e.stopPropagation();
+  const tr = e.target.closest("tr");
+
+  const trs = taskTableBody.querySelectorAll("tr");
+
+  const index = Array.from(trs).indexOf(tr);
+
+  if (index !== -1) {
+    taskList.splice(index, 1);
+  }
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  tr.remove();
 }
 
 function formatTime(milliseconds) {
