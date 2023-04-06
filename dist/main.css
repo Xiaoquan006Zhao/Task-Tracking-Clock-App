@@ -320,7 +320,7 @@ h2 {
       color: #0a0526; }
       #input-control .input-wrapper #task-input:focus {
         outline: none; }
-    #input-control .input-wrapper #clear-input {
+    #input-control .input-wrapper #clear-input-button {
       position: absolute;
       top: 0px;
       right: 0px; }
