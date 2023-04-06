@@ -42,6 +42,7 @@ function createIcon(classes) {
   return icon;
 }
 
+// on keyDown event for input
 export function onInputTaskDecription(e) {
   const key = e.key;
   const taskInput = document.querySelector("#task-input");
