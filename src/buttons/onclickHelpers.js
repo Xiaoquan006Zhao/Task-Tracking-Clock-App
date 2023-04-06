@@ -55,12 +55,12 @@ export function clearTask() {
     }
   });
 
-  taskList = [];
+  memoryStorageList.task_list = [];
   updateStorage("taskList", memoryStorageList.task_list);
 }
 
 // on click function for today/tomorrow add
-export function addtoTodo(e, storageTag, listMemoryStorage, listElement) {
+export function addtoTodo(storageTag, listMemoryStorage, listElement) {
   const lis = listElement.querySelectorAll("li");
   const lisText = Array.from(lis).map((li) => li.textContent);
 

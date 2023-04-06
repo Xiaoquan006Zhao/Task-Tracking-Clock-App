@@ -45,7 +45,6 @@ export function initButton() {
 
   buttons.today.addEventListener("click", (e) => {
     onClick.addtoTodo(
-      e,
       "todayList",
       memoryStorageList.today_list,
       document.querySelector(".today-list")
@@ -54,7 +53,6 @@ export function initButton() {
 
   buttons.tomorrow.addEventListener("click", (e) => {
     onClick.addtoTodo(
-      e,
       "tomorrowList",
       memoryStorageList.tomorrow_list,
       document.querySelector(".tomorrow-list")

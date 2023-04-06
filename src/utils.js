@@ -1,5 +1,5 @@
 import { buttons } from "./buttons/buttons";
-import { memoryStorageList } from "./inputControl";
+import { memoryStorageList, resetUI } from "./inputControl";
 import { timerProperty } from "./timerProperty";
 
 export function formatTime(milliseconds) {
@@ -57,10 +57,10 @@ export function onInputTaskDecription(e) {
       return;
     }
     buttons.start.click();
-  } else if (e.ctrlKey && key === "-") {
+  } else if (e.metaKey && key === "-") {
     e.preventDefault();
     buttons.today.click();
-  } else if (e.ctrlKey && key === "=") {
+  } else if (e.metaKey && key === "=") {
     e.preventDefault();
     buttons.tomorrow.click();
   } else if (key === "Escape") {
@@ -88,7 +88,7 @@ export function onInputGlobal(e) {
       document.querySelector("#task-input").focus();
       break;
     case "m":
-      if (e.ctrlKey) {
+      if (e.metaKey) {
         e.preventDefault();
         buttons.moveToToday.click();
       }
