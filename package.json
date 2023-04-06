@@ -4,12 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "node-sass -w scss/ -o src/css/ --recursive"
+    "sass": "node-sass -w scss/ -o src/css/ --recursive",
+    "build": "webpack",
+    "dev": "webpack serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^8.0.0"
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "node-sass": "^8.0.0",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
+  },
+  "dependencies": {
+    "webpack-merge": "^5.8.0"
   }
 }

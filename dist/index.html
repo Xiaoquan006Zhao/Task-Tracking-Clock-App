@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./inputControl.js" type="module" defer></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="./main.js" type="module" defer></script>
+    <link rel="stylesheet" type="text/css" href="main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -30,7 +30,7 @@
       <div id="input-control" class="bg-secondary">
         <div class="input-wrapper">
           <input type="text" id="task-input" placeholder="Enter task here" />
-          <button id="clear-input" class="hidden">
+          <button id="clear-input-button" class="hidden">
             <i class="fas fa-times"></i>
           </button>
         </div>
@@ -44,7 +44,7 @@
           <option value="Necessity">Necessity</option>
         </select>
         <div id="start-button" class="btn-primary">Start</div>
-        <div id="later-button" class="btn-primary">Today</div>
+        <div id="today-button" class="btn-primary">Today</div>
         <div id="tomorrow-button" class="btn-primary">Tomorrow</div>
         <div id="todo-button" class="btn-primary">ToDo</div>
       </div>
@@ -101,11 +101,11 @@
           Today:
           <i
             class="fa-solid fa-xmark text-red"
-            id="delete-all-today"
+            id="delete-all-today-button"
             style="margin-right: 3px"
           ></i>
         </h2>
-        <ul class="todo-list"></ul>
+        <ul class="today-list"></ul>
       </section>
 
       <div id="moveToToday-button" class="btn-secondary">move</div>
@@ -115,7 +115,7 @@
           Tomorrow:
           <i
             class="fa-solid fa-xmark text-red"
-            id="delete-all-tomorrow"
+            id="delete-all-tomorrow-button"
             style="margin-right: 3px"
           ></i>
         </h2>
