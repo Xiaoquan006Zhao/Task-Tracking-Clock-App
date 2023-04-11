@@ -66,6 +66,7 @@
       align-self: stretch;
       background: transparent;
       text-decoration: none;
+      white-space: normal;
       border: none;
       border-bottom: 3px solid $primary-color;
       color: $primary-color;
@@ -77,8 +78,8 @@
 
     #clear-input-button {
       position: absolute;
-      top: 0px;
-      right: 0px;
+      top: 10px;
+      right: -10px;
     }
   }
 
@@ -124,10 +125,8 @@ tr {
 
 td {
   max-width: 30vw !important;
-  text-overflow: ellipsis;
-  // max-width: calc(60vw / 100) !important;
   position: relative;
-  overflow: hidden;
+  white-space: normal;
   padding: 10px;
   // refer to th for reasons to use box-shadow
   box-shadow: -3px 0px 0px inset #fff, 0px -1px 0px inset #aaa;
@@ -135,9 +134,11 @@ td {
   #category-filter {
     height: 100%;
     width: 100%;
+    margin: 0px;
   }
 
   #description-filter {
+    margin: 0px;
     text-decoration: none;
     border: none;
     outline: none;

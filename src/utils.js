@@ -45,11 +45,15 @@ function createIcon(classes) {
 // on keyDown event for input
 export function onInputTaskDecription(e) {
   const key = e.key;
-  const taskInput = document.querySelector("#task-input");
-  const taskDescription = taskInput.value.trim();
+  const taskInput = e.target;
+  const taskDescription = e.target.value;
 
   if (taskDescription !== "") {
     buttons.clearInput.classList.remove("hidden");
+  }
+
+  if (taskDescription === "") {
+    buttons.clearInput.classList.add("hidden");
   }
 
   if (key === "Enter") {

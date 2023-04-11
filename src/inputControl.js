@@ -92,7 +92,7 @@ function onClickTodo(e, whichlist) {
 }
 
 function init() {
-  taskInput.addEventListener("keydown", onInputTaskDecription);
+  taskInput.addEventListener("keyup", onInputTaskDecription);
 
   document.addEventListener("keydown", onInputGlobal);
 
