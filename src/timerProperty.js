@@ -1,4 +1,4 @@
-import { formatTime, currentTask } from "./utils";
+import { formatTime, currentTask, updateTotalTime } from "./utils";
 import { startButton } from "./buttons/buttons";
 
 export const timerProperty = {
@@ -12,6 +12,9 @@ export const timerProperty = {
 // helper method to initialize timer property in startTimer()
 export function startTimerProperty() {
   startButton(true);
+
+  document.querySelector(".current-task-dislay").classList.remove("bg-light");
+  document.querySelector(".current-task-dislay").classList.add("bg-nice");
 
   // start counting
   timerProperty.timerRunning = true;
@@ -27,14 +30,15 @@ export function startTimerProperty() {
 // helper method to calculate/update timer property in startTimer()
 export function stopTimerProperty() {
   startButton(false);
-  timerProperty.timerRunning = false;
 
+  document.querySelector(".current-task-dislay").classList.add("bg-light");
+  document.querySelector(".current-task-dislay").classList.remove("bg-nice");
+
+  // stop the timer
+  timerProperty.timerRunning = false;
   const endTime = new Date();
   currentTask().endTime = endTime;
   currentTask().duration = endTime - currentTask().startTime;
 
-  timerProperty.totalTime += currentTask().duration;
-  document.querySelector("#total-time").textContent = formatTime(
-    timerProperty.totalTime
-  );
+  updateTotalTime(currentTask().duration);
 }

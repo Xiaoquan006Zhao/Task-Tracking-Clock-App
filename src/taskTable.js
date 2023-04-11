@@ -1,6 +1,12 @@
 import { memoryStorageList } from "./inputControl";
-import { formatTime, createButton, currentTask } from "./utils";
+import {
+  formatTime,
+  createButton,
+  currentTask,
+  updateTotalTime,
+} from "./utils";
 import { updateStorage } from "./browserStorage";
+import { timerProperty } from "./timerProperty";
 
 function deleteTaskFromTable(e) {
   e.stopPropagation();
@@ -11,11 +17,14 @@ function deleteTaskFromTable(e) {
   const index = Array.from(trs).indexOf(tr);
 
   if (index !== -1) {
-    memoryStorageList.task_list.splice(index, 1);
-  }
+    // second boolean is for plus or minus
+    updateTotalTime(memoryStorageList.task_list[index].duration, true);
 
-  updateStorage("taskList", memoryStorageList.task_list);
-  tr.remove();
+    memoryStorageList.task_list.splice(index, 1);
+
+    updateStorage("taskList", memoryStorageList.task_list);
+    tr.remove();
+  }
 }
 
 export function addTaskToTable(taskToAdd) {
@@ -70,30 +79,76 @@ export function addTaskToTable(taskToAdd) {
 // ------------------------------  Filter Starts -----------------------------------------------
 
 function filterDescription(filterValue) {
-  let divTasks = document.querySelector("tbody").querySelectorAll("tr");
-  divTasks = Array.from(divTasks);
-  divTasks = divTasks.slice(0, -1);
+  let trTasks = document.querySelector("tbody").querySelectorAll("tr");
+  trTasks = Array.from(trTasks);
+  trTasks = trTasks.slice(0, -1);
 
-  divTasks.forEach((div) => {
-    const taskDescription = div.firstElementChild.textContent;
+  let filteredTotalTime = "00:00:00";
 
-    div.style.display = taskDescription.includes(filterValue) ? "" : "none";
+  trTasks.forEach((task) => {
+    const taskDescription = task.firstElementChild.textContent;
+    const taskDuration = task.querySelector(":nth-child(3)").textContent;
+
+    if (taskDescription.includes(filterValue)) {
+      task.style.display = "";
+      filteredTotalTime = addTimes(filteredTotalTime, taskDuration);
+    } else {
+      task.style.display = "none";
+    }
   });
+
+  document.querySelector("#total-time").textContent = filteredTotalTime;
 }
 
 function filterCategory(filterValue) {
-  let divTasks = document.querySelector("tbody").querySelectorAll("tr");
-  divTasks = Array.from(divTasks);
-  divTasks = divTasks.slice(0, -1);
+  let trTasks = document.querySelector("tbody").querySelectorAll("tr");
+  trTasks = Array.from(trTasks);
+  trTasks = trTasks.slice(0, -1);
 
-  divTasks.forEach((div) => {
-    const taskCategory = div.querySelector(":nth-child(2)").textContent;
+  let filteredTotalTime = "00:00:00";
 
-    div.style.display =
-      filterValue === "----" || taskCategory.includes(filterValue)
-        ? ""
-        : "none";
+  trTasks.forEach((task) => {
+    const taskCategory = task.querySelector(":nth-child(2)").textContent;
+    const taskDuration = task.querySelector(":nth-child(3)").textContent;
+
+    if (filterValue === "----" || taskCategory.includes(filterValue)) {
+      task.style.display = "";
+      filteredTotalTime = addTimes(filteredTotalTime, taskDuration);
+    } else {
+      task.style.display = "none";
+    }
   });
+
+  document.querySelector("#total-time").textContent = filteredTotalTime;
+}
+
+function addTimes(timeString1, timeString2) {
+  var timeParts1 = timeString1.split(":");
+  var hours1 = parseInt(timeParts1[0]);
+  var minutes1 = parseInt(timeParts1[1]);
+  var seconds1 = parseInt(timeParts1[2]);
+
+  var timeParts2 = timeString2.split(":");
+  var hours2 = parseInt(timeParts2[0]);
+  var minutes2 = parseInt(timeParts2[1]);
+  var seconds2 = parseInt(timeParts2[2]);
+
+  var totalSeconds =
+    (hours1 + hours2) * 3600 + (minutes1 + minutes2) * 60 + seconds1 + seconds2;
+
+  var hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  var minutes = Math.floor(totalSeconds / 60);
+  var seconds = totalSeconds % 60;
+
+  return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+}
+
+function pad(number) {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number;
 }
 
 export function initTable() {

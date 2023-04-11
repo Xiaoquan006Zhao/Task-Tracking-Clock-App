@@ -1,5 +1,5 @@
 import { memoryStorageList } from "./inputControl";
-import { createTodo } from "./utils";
+import { createTodo, updateTotalTime } from "./utils";
 import { addTaskToTable } from "./taskTable";
 
 export function updateStorage(tag, list) {
@@ -57,7 +57,7 @@ export function initStorage() {
   memoryStorageList.task_list.forEach((task) => {
     task.startTime = new Date(task.startTime);
     task.endTime = new Date(task.endTime);
-
+    updateTotalTime(task.duration);
     addTaskToTable(task);
   });
 

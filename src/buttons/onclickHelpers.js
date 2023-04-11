@@ -6,7 +6,7 @@ import {
 
 import { resetUI, memoryStorageList } from "../inputControl";
 
-import { createTodo } from "../utils";
+import { createTodo, clearTotalTime } from "../utils";
 
 // on click function for moveToDay
 export function moveToToday() {
@@ -57,6 +57,8 @@ export function clearTask() {
 
   memoryStorageList.task_list = [];
   updateStorage("taskList", memoryStorageList.task_list);
+
+  clearTotalTime();
 }
 
 // on click function for today/tomorrow add

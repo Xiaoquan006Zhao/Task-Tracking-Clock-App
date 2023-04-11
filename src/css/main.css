@@ -37,6 +37,10 @@
   background-color: #eca4a4;
   color: #000; }
 
+.bg-nice {
+  background-color: #e26161;
+  color: #000; }
+
 .py-1 {
   padding-top: 1rem;
   padding-bottom: 1rem; }
@@ -189,6 +193,10 @@ a {
   background-color: #eca4a4;
   color: #000; }
 
+.bg-nice {
+  background-color: #e26161;
+  color: #000; }
+
 .py-1 {
   padding-top: 1rem;
   padding-bottom: 1rem; }
@@ -270,12 +278,17 @@ h2 {
   align-items: center;
   justify-content: space-between; }
 
-.hotkey {
+.hotkeys {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
   margin: 10px 0px; }
-  .hotkey p {
+  .hotkeys .hotkey {
+    display: flex; }
+    .hotkeys .hotkey .key {
+      background-color: #e26161;
+      color: #000; }
+  .hotkeys p {
     background-color: #c6c6c6;
     color: #000;
     border-radius: 5px;
@@ -285,9 +298,7 @@ h2 {
 .timer-starts {
   background: #ed3d3d; }
 
-#current-task-dislay {
-  background-color: #e26161;
-  color: #000;
+.current-task-dislay {
   padding: 10px;
   font-size: 1.5rem;
   font-weight: 800;

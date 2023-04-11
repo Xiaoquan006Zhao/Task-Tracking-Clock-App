@@ -66,7 +66,9 @@ export function onInputTaskDecription(e) {
     buttons.tomorrow.click();
   } else if (key === "Escape") {
     e.preventDefault();
-    resetUI();
+    taskInput.value = "";
+    taskInput.focus();
+    buttons.clearInput.classList.add("hidden");
   }
 }
 
@@ -107,4 +109,23 @@ export function validateInputText(inputText, inputElement) {
 
 export function currentTask() {
   return memoryStorageList.task_list[memoryStorageList.task_list.length - 1];
+}
+
+export function updateTotalTime(duration, minus) {
+  if (minus) {
+    timerProperty.totalTime -= duration;
+  } else {
+    timerProperty.totalTime += duration;
+  }
+
+  document.querySelector("#total-time").textContent = formatTime(
+    timerProperty.totalTime
+  );
+}
+
+export function clearTotalTime() {
+  timerProperty.totalTime = 0;
+  document.querySelector("#total-time").textContent = formatTime(
+    timerProperty.totalTime
+  );
 }

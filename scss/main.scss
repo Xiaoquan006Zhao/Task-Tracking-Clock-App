@@ -8,11 +8,20 @@
   justify-content: space-between;
 }
 
-.hotkey {
+.hotkeys {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
   margin: 10px 0px;
+
+  .hotkey {
+    display: flex;
+
+    .key {
+      @include set-color-and-bg($nice-color);
+    }
+  }
+
   p {
     @include set-color-and-bg($light-color);
     border-radius: 5px;
@@ -25,8 +34,7 @@
   background: rgb(237, 61, 61);
 }
 
-#current-task-dislay {
-  @include set-color-and-bg($nice-color);
+.current-task-dislay {
   padding: 10px;
   font-size: 1.5rem;
   font-weight: 800;

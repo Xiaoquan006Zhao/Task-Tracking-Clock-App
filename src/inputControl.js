@@ -132,7 +132,6 @@ export function resetUI() {
   taskInput.focus();
   buttons.clearInput.classList.add("hidden");
   document.querySelector(".todo-wrapper").classList.add("hidden");
-
   document.querySelector("#current-task").textContent = `Current Task:`;
   document.querySelector("#record-time").textContent = "00:00:00";
 }

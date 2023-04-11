@@ -16,15 +16,42 @@
     />
   </head>
   <body>
-    <section class="hotkey container">
-      <p>Tab: Focus input</p>
-      <p>ESC: Clear input</p>
-      <p>Enter: Start task</p>
-      <p>CMD -: Add to Today</p>
-      <p>CMD =: Add to Tomorrow</p>
-      <p>Shift: Stop task</p>
-      <p>`: Toggle todo window</p>
-      <p>CMD m: Move to Today</p>
+    <section class="hotkeys container">
+      <div class="hotkey">
+        <p class="key">Tab</p>
+        <p>Focus input</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">ESC</p>
+        <p>Clear input</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">Enter</p>
+        <p>Start task</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">Shift</p>
+        <p>Stop Task</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">CMD</p>
+        <p class="key">-</p>
+        <p>Add to Today</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">CMD</p>
+        <p class="key">=</p>
+        <p>Add to Tomorrow</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">`</p>
+        <p>Toggle Todo Window</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">CMD</p>
+        <p class="key">m</p>
+        <p>Move Task to Today</p>
+      </div>
     </section>
     <section class="container">
       <div id="input-control" class="bg-secondary">
@@ -51,7 +78,7 @@
     </section>
 
     <section class="container">
-      <div id="current-task-dislay">
+      <div class="current-task-dislay bg-light">
         <div id="current-task">Current Task:</div>
         <div id="record-time">00:00:00</div>
       </div>
