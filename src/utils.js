@@ -62,10 +62,10 @@ export function onInputTaskDecription(e) {
       return;
     }
     buttons.start.click();
-  } else if (e.metaKey && key === "-") {
+  } else if (e.ctrlKey && key === "-") {
     e.preventDefault();
     buttons.today.click();
-  } else if (e.metaKey && key === "=") {
+  } else if (e.ctrlKey && key === "=") {
     e.preventDefault();
     buttons.tomorrow.click();
   } else if (key === "Escape") {
@@ -95,7 +95,7 @@ export function onInputGlobal(e) {
       document.querySelector("#task-input").focus();
       break;
     case "m":
-      if (e.metaKey) {
+      if (e.ctrlKey) {
         e.preventDefault();
         buttons.moveToToday.click();
       }
