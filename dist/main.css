@@ -310,17 +310,16 @@ h2 {
   justify-content: space-evenly; }
 
 #input-control {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto; }
+  padding: 10px; }
   #input-control * {
     margin: 5px; }
+  #input-control #button-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); }
   #input-control .input-wrapper {
     position: relative; }
     #input-control .input-wrapper #task-input {
-      width: 35vw;
+      width: 90vw;
       font-size: 1.5rem;
       align-self: stretch;
       background: transparent;
