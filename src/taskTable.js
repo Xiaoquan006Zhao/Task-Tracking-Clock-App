@@ -1,4 +1,4 @@
-import { memoryStorageList } from "./inputControl";
+import { List } from "./utils";
 import {
   formatTime,
   createButton,
@@ -6,7 +6,6 @@ import {
   updateTotalTime,
 } from "./utils";
 import { updateStorage } from "./browserStorage";
-import { timerProperty } from "./timerProperty";
 
 function deleteTaskFromTable(e) {
   e.stopPropagation();
@@ -18,11 +17,11 @@ function deleteTaskFromTable(e) {
 
   if (index !== -1) {
     // second boolean is for plus or minus
-    updateTotalTime(memoryStorageList.task_list[index].duration, true);
+    updateTotalTime(List.task.listMemory[index].duration, true);
 
-    memoryStorageList.task_list.splice(index, 1);
+    List.task.listMemory.splice(index, 1);
 
-    updateStorage("taskList", memoryStorageList.task_list);
+    updateStorage(List.task);
     tr.remove();
   }
 }

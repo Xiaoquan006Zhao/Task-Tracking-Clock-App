@@ -1,18 +1,24 @@
 import * as onClick from "./onclickHelpers";
-import { memoryStorageList, resetUI } from "../inputControl";
+import { resetUI } from "../main";
+import { List } from "../utils";
 
 export const buttons = {
   start: document.querySelector("#start-button"),
-  today: document.querySelector("#today-button"),
-  tomorrow: document.querySelector("#tomorrow-button"),
   todo: document.querySelector("#todo-button"),
-
-  moveToToday: document.querySelector("#moveToToday-button"),
   newDay: document.querySelector("#newDay-button"),
-  deleteAllToday: document.querySelector("#delete-all-today-button"),
-  deleteAllTomorrow: document.querySelector("#delete-all-tomorrow-button"),
-
   clearInput: document.querySelector("#clear-input-button"),
+
+  todoList: {
+    morning: document.querySelector("#morning-button"),
+    afternoon: document.querySelector("#afternoon-button"),
+    night: document.querySelector("#night-button"),
+  },
+
+  deleteAll: {
+    morning: document.querySelector("#delete-all-morning-button"),
+    afternoon: document.querySelector("#delete-all-afternoon-button"),
+    night: document.querySelector("#delete-all-night-button"),
+  },
 };
 
 export function startButton(start) {
@@ -25,37 +31,26 @@ export function startButton(start) {
   }
 }
 
+function initListButtons(list, index) {
+  if (index !== 3) {
+    Object.values(buttons.deleteAll)[index].addEventListener("click", (e) => {
+      onClick.deleteAll(list);
+    });
+
+    Object.values(buttons.todoList)[index].addEventListener("click", (e) => {
+      onClick.addtoTodo(list);
+    });
+  }
+}
+
 export function initButton() {
-  buttons.deleteAllToday.addEventListener("click", (e) => {
-    onClick.deleteAll("todayList", document.querySelector(".today-list"));
-  });
-  buttons.deleteAllTomorrow.addEventListener("click", (e) => {
-    onClick.deleteAll("tomorrowList", document.querySelector(".tomorrow-list"));
+  Object.values(List).forEach((l, index) => {
+    initListButtons(l, index);
   });
 
   buttons.clearInput.addEventListener("click", resetUI);
-
   buttons.newDay.addEventListener("click", onClick.clearTask);
-
   buttons.todo.addEventListener("click", (e) => {
     document.querySelector(".todo-wrapper").classList.remove("hidden");
-  });
-
-  buttons.moveToToday.addEventListener("click", onClick.moveToToday);
-
-  buttons.today.addEventListener("click", (e) => {
-    onClick.addtoTodo(
-      "todayList",
-      memoryStorageList.today_list,
-      document.querySelector(".today-list")
-    );
-  });
-
-  buttons.tomorrow.addEventListener("click", (e) => {
-    onClick.addtoTodo(
-      "tomorrowList",
-      memoryStorageList.tomorrow_list,
-      document.querySelector(".tomorrow-list")
-    );
   });
 }

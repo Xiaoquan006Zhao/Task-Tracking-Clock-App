@@ -35,13 +35,18 @@
       </div>
       <div class="hotkey">
         <p class="key">CTL</p>
-        <p class="key">-</p>
-        <p>Add to Today</p>
+        <p class="key">8</p>
+        <p>Add to Morning</p>
       </div>
       <div class="hotkey">
         <p class="key">CTL</p>
-        <p class="key">=</p>
-        <p>Add to Tomorrow</p>
+        <p class="key">9</p>
+        <p>Add to Afternoon</p>
+      </div>
+      <div class="hotkey">
+        <p class="key">CTL</p>
+        <p class="key">0</p>
+        <p>Add to Night</p>
       </div>
       <div class="hotkey">
         <p class="key">`</p>
@@ -66,18 +71,22 @@
           </button>
         </div>
 
-        <select id="category-select" class="btn-primary">
-          <option value="Research">Research</option>
-          <option value="Exercise">Exercise</option>
-          <option value="Startup">Startup</option>
-          <option value="School">School</option>
-          <option value="Relax">Relax</option>
-          <option value="Necessity">Necessity</option>
-        </select>
-        <div id="start-button" class="btn-primary">Start</div>
-        <div id="today-button" class="btn-primary">Today</div>
-        <div id="tomorrow-button" class="btn-primary">Tomorrow</div>
-        <div id="todo-button" class="btn-primary">ToDo</div>
+        <div id="button-wrapper">
+          <select id="category-select" class="btn-primary">
+            <option value="Research">Research</option>
+            <option value="Exercise">Exercise</option>
+            <option value="Startup">Startup</option>
+            <option value="School">School</option>
+            <option value="Relax">Relax</option>
+            <option value="Necessity">Necessity</option>
+          </select>
+          <div id="start-button" class="btn-primary">Start</div>
+          <div id="todo-button" class="btn-primary">ToDo</div>
+
+          <div id="morning-button" class="btn-primary">Morning</div>
+          <div id="afternoon-button" class="btn-primary">Afternoon</div>
+          <div id="night-button" class="btn-primary">Night</div>
+        </div>
       </div>
     </section>
 
@@ -129,28 +138,38 @@
     <div class="todo-wrapper hidden">
       <section class="todo bg-primary">
         <h2 class="embed-button">
-          Today:
+          Morning:
           <i
             class="fa-solid fa-xmark text-red"
-            id="delete-all-today-button"
+            id="delete-all-morning-button"
             style="margin-right: 3px"
           ></i>
         </h2>
-        <ul class="today-list"></ul>
+        <ul class="morning-list"></ul>
       </section>
-
-      <div id="moveToToday-button" class="btn-secondary">move</div>
 
       <section class="todo bg-primary">
         <h2 class="embed-button">
-          Tomorrow:
+          Afternoon:
           <i
             class="fa-solid fa-xmark text-red"
-            id="delete-all-tomorrow-button"
+            id="delete-all-afternoon-button"
             style="margin-right: 3px"
           ></i>
         </h2>
-        <ul class="tomorrow-list"></ul>
+        <ul class="afternoon-list"></ul>
+      </section>
+
+      <section class="todo bg-primary">
+        <h2 class="embed-button">
+          Night:
+          <i
+            class="fa-solid fa-xmark text-red"
+            id="delete-all-night-button"
+            style="margin-right: 3px"
+          ></i>
+        </h2>
+        <ul class="night-list"></ul>
       </section>
     </div>
   </body>

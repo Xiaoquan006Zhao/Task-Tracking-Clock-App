@@ -1,6 +1,31 @@
-import { buttons } from "./buttons/buttons";
-import { memoryStorageList, resetUI } from "./inputControl";
 import { timerProperty } from "./timerProperty";
+
+export const Input = {
+  task: document.querySelector("#task-input"),
+  category: document.querySelector("#category-select"),
+};
+
+export const List = {
+  morning: {
+    tag: "morningList",
+    listMemory: [],
+    listElement: document.querySelector(".morning-list"),
+  },
+  afternoon: {
+    tag: "afternoonList",
+    listMemory: [],
+    listElement: document.querySelector(".afternoon-list"),
+  },
+  night: {
+    tag: "nightList",
+    listMemory: [],
+    listElement: document.querySelector(".night-list"),
+  },
+  task: {
+    tag: "taskList",
+    listMemory: [],
+  },
+};
 
 export function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
@@ -42,66 +67,6 @@ function createIcon(classes) {
   return icon;
 }
 
-// on keyDown event for input
-export function onInputTaskDecription(e) {
-  const key = e.key;
-  const taskInput = e.target;
-  const taskDescription = e.target.value;
-
-  if (taskDescription !== "") {
-    buttons.clearInput.classList.remove("hidden");
-  }
-
-  if (taskDescription === "") {
-    buttons.clearInput.classList.add("hidden");
-  }
-
-  if (key === "Enter") {
-    e.preventDefault();
-    if (!validateInputText(taskDescription, taskInput)) {
-      return;
-    }
-    buttons.start.click();
-  } else if (e.ctrlKey && key === "-") {
-    e.preventDefault();
-    buttons.today.click();
-  } else if (e.ctrlKey && key === "=") {
-    e.preventDefault();
-    buttons.tomorrow.click();
-  } else if (key === "Escape") {
-    e.preventDefault();
-    taskInput.value = "";
-    taskInput.focus();
-    buttons.clearInput.classList.add("hidden");
-  }
-}
-
-export function onInputGlobal(e) {
-  const key = e.key;
-
-  switch (key) {
-    case "Shift":
-      if (timerProperty.timerRunning) {
-        e.preventDefault();
-        buttons.start.click();
-      }
-      break;
-    case "`":
-      e.preventDefault();
-      document.querySelector(".todo-wrapper").classList.toggle("hidden");
-      break;
-    case "Tab":
-      e.preventDefault();
-      document.querySelector("#task-input").focus();
-      break;
-    case "m":
-      if (e.ctrlKey) {
-        e.preventDefault();
-        buttons.moveToToday.click();
-      }
-  }
-}
-
 export function validateInputText(inputText, inputElement) {
   if (inputText === "") {
     inputElement.value = "";
@@ -112,7 +77,7 @@ export function validateInputText(inputText, inputElement) {
 }
 
 export function currentTask() {
-  return memoryStorageList.task_list[memoryStorageList.task_list.length - 1];
+  return List.task.listMemory[List.task.listMemory.length - 1];
 }
 
 export function updateTotalTime(duration, minus) {
